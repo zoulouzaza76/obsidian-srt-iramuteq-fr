@@ -59,7 +59,7 @@ function parseAndCleanTranscript(raw, options) {
   }
 
   if (iramuteqMode) {
-    const out = ["**** *entretien_obsidian"];
+    const out = ["**** *entretien_corpus"];
     for (const turn of turns) {
       const token =
         turn.speaker
@@ -86,7 +86,7 @@ class SrtVttCleanerIramuteqPlugin extends obsidian.Plugin {
   async onload() {
     this.addCommand({
       id: "clean-srt-vtt-markdown-fr",
-      name: "Nettoyer la note .SRT / .VTT en dialogue Markdown (Typographie FR)",
+      name: "Clean SRT or VTT transcript to Markdown",
       editorCallback: (editor) => {
         const sel = editor.getSelection();
         const source = sel || editor.getValue();
@@ -95,7 +95,7 @@ class SrtVttCleanerIramuteqPlugin extends obsidian.Plugin {
           iramuteqMode: false,
         });
         if (!cleaned) {
-          new obsidian.Notice("Aucun segment .SRT / .VTT détecté.");
+          new obsidian.Notice("No SRT or VTT segments found.");
           return;
         }
         if (sel) {
@@ -103,13 +103,13 @@ class SrtVttCleanerIramuteqPlugin extends obsidian.Plugin {
         } else {
           editor.setValue(cleaned);
         }
-        new obsidian.Notice("Transcription nettoyée (espaces insécables FR appliquées).");
+        new obsidian.Notice("Transcript cleaned with French typography.");
       },
     });
 
     this.addCommand({
       id: "convert-note-to-iramuteq-corpus",
-      name: "Convertir la transcription en corpus étoilé IRaMuTeQ (**** *entretien)",
+      name: "Convert transcript to IRaMuTeQ starred corpus",
       editorCallback: (editor) => {
         const sel = editor.getSelection();
         const source = sel || editor.getValue();
@@ -118,7 +118,7 @@ class SrtVttCleanerIramuteqPlugin extends obsidian.Plugin {
           iramuteqMode: true,
         });
         if (!corpus) {
-          new obsidian.Notice("Aucun segment convertible en corpus IRaMuTeQ.");
+          new obsidian.Notice("No transcript segments found for IRaMuTeQ.");
           return;
         }
         if (sel) {
@@ -126,13 +126,13 @@ class SrtVttCleanerIramuteqPlugin extends obsidian.Plugin {
         } else {
           editor.setValue(corpus);
         }
-        new obsidian.Notice("Corpus étoilé IRaMuTeQ généré en local.");
+        new obsidian.Notice("IRaMuTeQ starred corpus generated locally.");
       },
     });
 
     this.addCommand({
       id: "apply-french-typography-note",
-      name: "Appliquer les espaces insécables françaises à la sélection / note",
+      name: "Apply French non-breaking spaces",
       editorCallback: (editor) => {
         const sel = editor.getSelection();
         if (sel) {
@@ -140,7 +140,7 @@ class SrtVttCleanerIramuteqPlugin extends obsidian.Plugin {
         } else {
           editor.setValue(applyFrenchTypography(editor.getValue()));
         }
-        new obsidian.Notice("Typographie française appliquée.");
+        new obsidian.Notice("French non-breaking spaces applied.");
       },
     });
   }
