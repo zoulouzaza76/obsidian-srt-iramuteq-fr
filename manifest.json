@@ -1,0 +1,11 @@
+{
+  "id": "srt-vtt-cleaner-iramuteq-fr",
+  "name": "SRT/VTT Cleaner & IRaMuTeQ (FR)",
+  "version": "1.0.0",
+  "minAppVersion": "1.5.0",
+  "description": "Clean French .SRT/.VTT transcripts (Teams, Zoom, Whisper), merge speaker turns, apply French non-breaking spaces, and export IRaMuTeQ / Zotero interview notes locally.",
+  "author": "Le Scribe Audio (Jérémie Terral)",
+  "authorUrl": "https://lescribeaudio.com/transcription-audio-iramuteq-atlasti-analyse-textuelle",
+  "fundingUrl": "https://lescribeaudio.com/outils",
+  "isDesktopOnly": false
+}
